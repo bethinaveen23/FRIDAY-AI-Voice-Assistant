@@ -58,7 +58,8 @@ app.post("/api/chat", async (req, res) => {
     if (!response.ok) {
       console.log("OpenAI ERROR:", data);
       return res.status(response.status).json({
-        reply: data?.error?.message || "OpenAI request failed"
+        reply: "AI quota is exhausted. This is a demo response. Artificial Intelligence is the simulation of human intelligence by machines, enabling them to learn, reason, and make decisions."
+
       });
     }
     
@@ -79,4 +80,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ FRIDAY backend running on port ${PORT}`);
 });
+
 
