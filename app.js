@@ -215,7 +215,7 @@ textInput.addEventListener("keydown", (e) => {
 // ------------------- AI call (SAFE via backend) -------------------
 async function getAIReply(userText) {
   try {
-    const res = await fetch("http://localhost:3000/api/chat", {
+    const res = await fetch("https://friday-ai-z7aj.onrender.com/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: userText })
@@ -384,3 +384,4 @@ async function translateText(message) {
     return "Sorry, I couldn’t translate that.";
   }
 }
+
