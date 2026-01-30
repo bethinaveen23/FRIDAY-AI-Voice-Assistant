@@ -53,10 +53,18 @@ app.post("/api/chat", async (req, res) => {
     );
 
     const data = await response.json();
-    const reply =
-      data?.choices?.[0]?.message?.content || "No reply from AI.";
 
+    // 👇 If OpenAI returns error, show it clearly
+    if (!response.ok) {
+      console.log("OpenAI ERROR:", data);
+      return res.status(response.status).json({
+        reply: data?.error?.message || "OpenAI request failed"
+      });
+    }
+    
+    const reply = data?.choices?.[0]?.message?.content || "No reply from AI.";
     res.json({ reply });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -71,3 +79,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ FRIDAY backend running on port ${PORT}`);
 });
+
